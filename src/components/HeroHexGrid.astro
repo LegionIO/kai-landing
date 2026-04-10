@@ -47,6 +47,7 @@
       cx: number; cy: number;
       baseAlpha: number;
       glowAlpha: number; glowTarget: number; glowSpeed: number;
+      rippleAlpha: number; rippleTarget: number;
       phase: number;
       tier: number;
       pulseDelay: number;
@@ -114,6 +115,8 @@
             glowAlpha: 0,
             glowTarget: 0,
             glowSpeed: rand(0.8, 2.5),
+            rippleAlpha: 0,
+            rippleTarget: 0,
             phase: rand(0, Math.PI * 2),
             tier,
             pulseDelay: rand(0, 12),
@@ -189,11 +192,18 @@
         context.fill();
       }
 
-      // Fill for tier 2+
+      // Fill for tier 2+ (ambient)
       if (hex.tier >= 2) {
         hexPath(hex.cx, hex.cy, r * 0.95);
         const fillAlpha = alpha * 0.06;
         context.fillStyle = `rgba(${palette.gold}, ${fillAlpha})`;
+        context.fill();
+      }
+
+      // Solid illumination fill from click ripple
+      if (hex.rippleAlpha > 0.01) {
+        hexPath(hex.cx, hex.cy, r * 0.95);
+        context.fillStyle = `rgba(${palette.goldBright}, ${hex.rippleAlpha * 0.35 * scrollFade})`;
         context.fill();
       }
 
@@ -312,9 +322,8 @@
             hoverScale = 1 + influence * 0.12;
           }
 
-          // Ripple wave contributions
+          // Ripple wave contributions (brightness only, no scale)
           let rippleGlow = 0;
-          let rippleScale = 1;
           for (const rip of ripples) {
             const dx = hex.cx - rip.cx;
             const dy = hex.cy - rip.cy;
@@ -326,14 +335,15 @@
               const fade = Math.min(1, rip.life / (rip.maxLife * 0.4));
               const jitter = 0.5 + rip.noise[Math.abs(Math.round(hex.col * 7 + hex.row * 13)) % rip.noise.length] * 0.5;
               rippleGlow = Math.max(rippleGlow, wave * fade * jitter * 0.8);
-              rippleScale = Math.max(rippleScale, 1 + wave * fade * jitter * 0.15);
             }
           }
 
           hex.glowTarget = Math.min(1, hoverGlow + rippleGlow);
-          hex.scaleTarget = Math.max(hoverScale, rippleScale);
+          hex.rippleTarget = rippleGlow;
+          hex.scaleTarget = hoverScale;
 
           hex.glowAlpha += (hex.glowTarget - hex.glowAlpha) * delta * hex.glowSpeed * 3;
+          hex.rippleAlpha += (hex.rippleTarget - hex.rippleAlpha) * delta * hex.glowSpeed * 3;
           hex.scale += (hex.scaleTarget - hex.scale) * delta * 5;
         });
       }
