@@ -3,6 +3,7 @@
 Landing page for **Kai** — an open-source conversational AI assistant for engineering workflows.
 
 **Live site:** [kai-landing-6k8.pages.dev](https://kai-landing-6k8.pages.dev)
+**GitHub:** [kai-systems/kai-desktop](https://github.com/kai-systems/kai-desktop)
 
 ## Tech Stack
 
