@@ -6,8 +6,8 @@ const columns = [
     title: "Product",
     links: [
       { label: "Download", href: siteConfig.downloadUrl },
-      { label: "GitHub", href: "https://github.com/kai-systems/kai-desktop" },
-      { label: "Releases", href: "https://github.com/kai-systems/kai-desktop/releases" },
+      { label: "GitHub", href: siteConfig.githubUrl },
+      { label: "Releases", href: `${siteConfig.githubUrl}/releases` },
     ],
   },
   {
@@ -21,15 +21,15 @@ const columns = [
   {
     title: "Community",
     links: [
-      { label: "Discussions", href: "https://github.com/kai-systems/kai-desktop/discussions" },
-      { label: "Issues", href: "https://github.com/kai-systems/kai-desktop/issues" },
-      { label: "Contributing", href: "https://github.com/kai-systems/kai-desktop/blob/main/CONTRIBUTING.md" },
+      { label: "Discussions", href: `${siteConfig.githubUrl}/discussions` },
+      { label: "Issues", href: `${siteConfig.githubUrl}/issues` },
+      { label: "Contributing", href: `${siteConfig.githubUrl}/blob/main/CONTRIBUTING.md` },
     ],
   },
   {
     title: "Legal",
     links: [
-      { label: "MIT License", href: "https://github.com/kai-systems/kai-desktop/blob/main/LICENSE" },
+      { label: "MIT License", href: `${siteConfig.githubUrl}/blob/main/LICENSE` },
     ],
   },
 ];
