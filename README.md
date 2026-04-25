@@ -2,9 +2,6 @@
 
 Landing page for **Kai** — an open-source conversational AI workspace.
 
-**Live site:** [kai-landing-6k8.pages.dev](https://kai-landing-6k8.pages.dev)
-**GitHub:** [legionio/kai-desktop](https://github.com/legionio/kai-desktop)
-
 ## Tech Stack
 
 - [Astro](https://astro.build/) — static site framework

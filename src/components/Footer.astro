@@ -6,8 +6,10 @@ const columns = [
     title: "Product",
     links: [
       { label: "Download", href: siteConfig.downloadUrl },
-      { label: "GitHub", href: siteConfig.githubUrl },
-      { label: "Releases", href: `${siteConfig.githubUrl}/releases` },
+      ...(siteConfig.githubUrl ? [
+        { label: "GitHub", href: siteConfig.githubUrl },
+        { label: "Releases", href: `${siteConfig.githubUrl}/releases` },
+      ] : []),
     ],
   },
   {
@@ -18,20 +20,20 @@ const columns = [
       { label: "For Teams", href: "#for-teams" },
     ],
   },
-  {
+  ...(siteConfig.githubUrl ? [{
     title: "Community",
     links: [
       { label: "Discussions", href: `${siteConfig.githubUrl}/discussions` },
       { label: "Issues", href: `${siteConfig.githubUrl}/issues` },
       { label: "Contributing", href: `${siteConfig.githubUrl}/blob/main/CONTRIBUTING.md` },
     ],
-  },
-  {
+  }] : []),
+  ...(siteConfig.githubUrl ? [{
     title: "Legal",
     links: [
       { label: "MIT License", href: `${siteConfig.githubUrl}/blob/main/LICENSE` },
     ],
-  },
+  }] : []),
 ];
 ---
 
